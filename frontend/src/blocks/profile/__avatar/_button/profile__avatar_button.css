@@ -1,0 +1,19 @@
+.profile__avatar_button {
+position: absolute;
+    width: 120px;
+    height: 120px;
+    opacity: 0;
+    background-size: cover;
+    background-position: center;
+    background-image: url(/src/images/karandash.svg);
+    border-radius: 50%;
+    background-color: black;
+    background-repeat: no-repeat;
+}
+
+.profile__avatar_button:hover {
+    opacity: 0.8;
+    transition: opacity 0.5s ease-in-out;
+    background-size: 26px 26px;
+    cursor: pointer;
+}

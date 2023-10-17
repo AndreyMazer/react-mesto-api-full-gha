@@ -1,0 +1,11 @@
+.popup__feedback {
+  margin: 0;
+  max-width: 358px;
+  margin-top: 32px;
+  color: black;
+  text-align: center;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+}

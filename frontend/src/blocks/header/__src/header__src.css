@@ -1,0 +1,18 @@
+.header__src {
+  color: #fff;
+  text-align: right;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+  text-decoration: none;
+  margin: 0;
+  cursor: pointer;
+  float: right;
+  margin-top: 5px;
+  margin-bottom: 46px;
+}
+
+.header__src:hover {
+  opacity: 0.6;
+}

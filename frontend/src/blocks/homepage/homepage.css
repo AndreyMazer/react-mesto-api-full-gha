@@ -1,0 +1,10 @@
+.homepage {
+  margin: 0 auto;
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 358px;
+  margin-bottom: 80px;
+  align-items: center;
+}

@@ -1,0 +1,7 @@
+.element__like-counter {
+  grid-area: like-counter;
+  width: 10px;
+  height: 13px;
+  color: black;
+  margin: 0px 25px 10px auto;
+}

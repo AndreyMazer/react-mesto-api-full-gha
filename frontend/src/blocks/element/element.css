@@ -1,0 +1,15 @@
+.element {
+  margin: 0;
+  padding: 0;
+  max-width: 282px;
+  max-height: 362px;
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  display: grid;
+  grid-template-areas:
+    "gora gora"
+    "title like"
+    "title like-counter";
+}
+

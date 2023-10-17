@@ -1,0 +1,17 @@
+.element__like {
+  margin: 20px 20px 0 auto;
+  background-color: transparent;
+  grid-area: like;
+  background-image: url(../../../images/loys.svg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  border: none;
+  cursor: pointer;
+  min-width: 22px;
+  min-height: 19px;
+}
+
+.element__like:hover {
+  opacity: 0.5;
+}
+

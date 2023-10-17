@@ -1,0 +1,13 @@
+.header__menu {
+  position: relative;
+  display: none;
+  margin: 0;
+  padding: 0;
+  size: 24px;
+  background-color: transparent;
+  border: none;
+}
+
+.header__menu:hover {
+  opacity: 0.6;
+}

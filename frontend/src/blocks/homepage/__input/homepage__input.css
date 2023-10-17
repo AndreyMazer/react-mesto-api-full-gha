@@ -1,0 +1,15 @@
+.homepage__input {
+  font-style: normal;
+  color: #fff;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  display: block;
+  min-width: 358px;
+  border: 0;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+  background-color: transparent;
+}

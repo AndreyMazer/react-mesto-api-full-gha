@@ -1,0 +1,37 @@
+.popup__save {
+  margin: 0;
+  padding: 0;
+  width: 358px;
+  min-height: 50px;
+  margin-top: 25px;
+  margin-left: auto;
+  margin-right: auto;
+  background: #000000;
+  border-radius: 2px;
+  cursor: pointer;
+  border: none;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.popup__save:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .popup__save {
+    width: 238px;
+    min-height: 46px;
+    margin-top: 45px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
+
+.popup__save-delete {
+  margin-bottom: 40px;
+}
