@@ -9,6 +9,7 @@
     "dev": "set DEBUG=express:* & nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
   "author": "AndreyMazer",
   "license": "ISC",
   "dependencies": {
@@ -18,16 +19,15 @@
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "express-rate-limit": "^7.0.2",
+    "express-winston": "^4.2.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.5.2",
-    "validator": "^13.11.0"
+    "winston": "^3.11.0"
   },
   "devDependencies": {
     "eslint": "^8.49.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.28.1",
     "nodemon": "^3.0.1"
-  },
-  "keywords": []
+  }
 }
