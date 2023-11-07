@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { celebrate, Joi } = require("celebrate");
+
 const userRouter = require("./users");
 const cardRouter = require("./cards");
 const NotFoundError = require("../errors/notFoundError");
@@ -17,9 +18,9 @@ router.use((req, res, next) => {
   const { method } = req;
   if (allowedCors.includes(origin)) {
     res.header("Access-Control-Allow-Origin", origin);
-    const requestHeaders = req.headers["access-control-request-headers"];
     if (method === "OPTIONS") {
       res.header("Access-Control-Allow-Methods", DEFAULT_ALLOWED_METHODS);
+      const requestHeaders = req.headers["access-control-request-headers"];
       res.header("Access-Control-Allow-Headers", requestHeaders);
       return res.end();
     }

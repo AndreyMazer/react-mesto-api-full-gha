@@ -1,32 +1,31 @@
 import React from "react";
+import api from "../utils/Api";
 import "../index.css";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
-import ImagePopup from "./ImagePopup";
 import PopupWithForm from "./PopupWithForm";
+import ImagePopup from "./ImagePopup";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
-import api from "../utils/Api";
-import { register, authorize, checkJwt } from "../utils/Auth";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Register from "./Register";
 import Login from "./Login";
 import ProtectedRouteElement from "./ProtectedRoute";
 import InfoTooltip from "./InfoTooltip";
-import { Navigate } from "react-router-dom";
+import { register, authorize, checkJwt } from "../utils/Auth";
 
 function App() {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] =
     React.useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
+  const [isInfoTooltipOpen, setInfoTooltipOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(null);
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
-  const [isInfoTooltipOpen, setInfoTooltipOpen] = React.useState(false);
   const [isSuccessInfoTooltipStatus, setIsSuccessInfoTooltipStatus] =
     React.useState(false);
   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -34,18 +33,16 @@ function App() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    if (loggedIn) {
-      Promise.all([api.getProfile(), api.getInitialCards()])
-        .then(([resUser, resCard]) => {
-          setCurrentUser(resUser);
-          setCards(resCard);
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [loggedIn]);
+    Promise.all([api.getProfile(), api.getInitialCards()])
+      .then(([resUser, resCard]) => {
+        setCurrentUser(resUser);
+        setCards(resCard);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   React.useEffect(() => {
-    handleTokenCheck(loggedIn);
+    handleTokenCheck();
   }, []);
 
   function handleRegister(email, password) {
@@ -207,10 +204,6 @@ function App() {
                 onCardDelete={handleCardDelete}
               />
             }
-          />
-          <Route
-            path="/*"
-            element={<Navigate to={loggedIn ? "/" : "/sign-in"} />}
           />
         </Routes>
         <Footer />
