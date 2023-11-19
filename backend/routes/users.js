@@ -18,7 +18,7 @@ router.get(
       userId: Joi.string().alphanum().length(24).hex(),
     }),
   }),
-  getUser,
+  getUser
 );
 router.patch(
   '/me',
@@ -28,7 +28,7 @@ router.patch(
       about: Joi.string().min(2).max(30).required(),
     }),
   }),
-  updateProfile,
+  updateProfile
 );
 router.patch(
   '/me/avatar',
@@ -37,7 +37,7 @@ router.patch(
       avatar: Joi.string().regex(URL_VALIDATE),
     }),
   }),
-  updateAvatar,
+  updateAvatar
 );
 
 module.exports = router;
