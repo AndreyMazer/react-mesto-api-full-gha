@@ -17,6 +17,10 @@ class Api {
     return fetch(url, options).then(this._checkRes);
   }
 
+  setToken(jwt) {
+    this._headers['authorization'] = `Bearer ${jwt}`;
+}
+
   getProfile() {
     return this._toDo("users/me", {
       method: "GET",
@@ -85,10 +89,10 @@ class Api {
   }
 }
 
-export const api = new Api({
-  url: "https://mesto.nomoreparties.co/v1/cohort-70",
+const api = new Api({
+  url: "https://api.andreymazer.nomoredomainsmonster.ru",
   headers: {
-    authorization: "a28722e7-954c-4bb9-8b79-c4a8de175d4b",
+    authorization: "",
     "Content-Type": "application/json",
   },
 });

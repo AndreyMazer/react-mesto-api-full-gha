@@ -1,12 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login({ onLogin }) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const navigate = useNavigate();
 
   function handleSubmit(evt) {
     evt.preventDefault();
     onLogin(email, password);
+    navigate("/");
   }
 
   function handleEmailChange(evt) {

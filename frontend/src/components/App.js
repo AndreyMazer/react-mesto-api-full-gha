@@ -26,57 +26,75 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState(null);
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
-  const [isSuccessInfoTooltipStatus, setIsSuccessInfoTooltipStatus] =
-    React.useState(false);
+  //const [isSuccessInfoTooltipStatus, setIsSuccessInfoTooltipStatus] =
+  //React.useState(false);
+  const [message, setMessage] = React.useState(false);
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [userEmail, setUserEmail] = React.useState("");
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    Promise.all([api.getProfile(), api.getInitialCards()])
-      .then(([resUser, resCard]) => {
-        setCurrentUser(resUser);
-        setCards(resCard);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+    if (loggedIn) {
+      Promise.all([api.getProfile(), api.getInitialCards()])
+        .then(([resUser, resCard]) => {
+          setCurrentUser(resUser);
+          setCards(resCard);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [loggedIn]);
 
   React.useEffect(() => {
-    handleTokenCheck();
-  }, []);
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      checkJwt(jwt)
+        .then((res) => {
+          api.setToken(jwt);
+          setUserEmail(res.email);
+          setLoggedIn(true);
+          navigate("/", { replace: true });
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [navigate]);
 
   function handleRegister(email, password) {
-    register(password, email)
+    register(email, password)
       .then((res) => {
         setInfoTooltipOpen(true);
         if (res) {
-          setIsSuccessInfoTooltipStatus(true);
+          setMessage(true);
           navigate("/sign-in", { replace: true });
         }
       })
       .catch(() => {
-        setIsSuccessInfoTooltipStatus(false);
+        setMessage(true);
         setInfoTooltipOpen(true);
       });
   }
 
   function handleLogin(email, password) {
-    authorize(password, email)
+    authorize(email, password)
       .then((res) => {
         if (res) {
+          localStorage.setItem("jwt", res.jwt);
+          api.setToken(res.jwt);
           setLoggedIn(true);
-          setUserEmail(email);
+          setUserEmail(res.email);
           navigate("/", { replace: true });
-          localStorage.setItem("jwt", res.token);
         }
       })
       .catch(() => {
-        setIsSuccessInfoTooltipStatus(false);
+        setMessage(false);
         setInfoTooltipOpen(true);
       });
   }
 
-  function handleTokenCheck() {
+  function handleCardClick(card) {
+    setSelectedCard(card);
+  }
+
+ /* function handleTokenCheck() {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       checkJwt(jwt)
@@ -87,14 +105,12 @@ function App() {
         })
         .catch((err) => console.log(err));
     }
-  }
+  }*/
 
-  function handleCardClick(card) {
-    setSelectedCard(card);
-  }
+  
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
 
     if (!isLiked) {
       api
@@ -116,6 +132,7 @@ function App() {
         .catch((err) => console.log(err));
     }
   }
+
   function handleCardDelete(card) {
     api
       .deleteCard(card._id)
@@ -227,7 +244,7 @@ function App() {
         <InfoTooltip
           isOpen={isInfoTooltipOpen}
           onClose={closeAllPopups}
-          status={isSuccessInfoTooltipStatus}
+          status={message}
         />
       </div>
     </CurrentUserContext.Provider>
