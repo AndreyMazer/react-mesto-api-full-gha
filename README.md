@@ -24,7 +24,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.112.229
+IP-адрес 158.160.126.132
 
 Frontend https://andreymazer.nomoredomainsrocks.ru
 
