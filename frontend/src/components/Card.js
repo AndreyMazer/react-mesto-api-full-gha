@@ -2,11 +2,21 @@ import React from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   const currentUser = React.useContext(CurrentUserContext);
-  const isOwn = card.owner._id === currentUser._id;
-  const isLiked = card.likes.some((i) => i._id === currentUser._id);
-  const cardLikeButtonClassName = `element__like ${
-    isLiked && "element__like_active"
-  }`;
+  const isOwn = card.owner === currentUser._id;
+  const [isLiked, setisLiked] = React.useState(
+    card.likes.some((i) => i === currentUser._id)
+  );
+  const [cardLikeButtonClassName, setcardLikeButtonClassName] = React.useState(
+    `element__like ${isLiked && "element__like_active"}`
+  );
+
+  React.useEffect(() => {
+    setisLiked(card.likes.some((i) => i === currentUser._id));
+    setcardLikeButtonClassName(
+      `element__like ${isLiked && "element__like_active"}`
+    );
+  }, [card.likes, isLiked, currentUser._id]);
+
   const handleClick = () => {
     onCardClick(card);
   };
