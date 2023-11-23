@@ -58,6 +58,19 @@ function App() {
     }
   }, [navigate]);
 
+  /* function handleTokenCheck() {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      checkJwt(jwt)
+        .then((res) => {
+          setLoggedIn(true);
+          setUserEmail(res.data.email);
+          navigate("/", { replace: true });
+        })
+        .catch((err) => console.log(err));
+    }
+  }*/
+
   function handleRegister(email, password) {
     register(email, password)
       .then((res) => {
