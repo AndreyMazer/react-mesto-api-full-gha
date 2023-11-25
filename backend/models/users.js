@@ -35,14 +35,14 @@ const userSchema = new mongoose.Schema({
 userSchema.statics.findUserReference = function findUser(email, password) {
   return this.findOne({ email })
     .select("+password")
-    .then((user) => {
-      if (!user) {
+    .then((users) => {
+      if (!users) {
         return Promise.reject(
           new UnauthorizedError("Неверные email или пароль")
         );
       }
       
-      return bcrypt.compare(password, user.password).then((matched) => {
+      return bcrypt.compare(password, users.password).then((matched) => {
         if (!matched) {
           return Promise.reject(
             new UnauthorizedError("Неверные email или пароль")
@@ -54,4 +54,4 @@ userSchema.statics.findUserReference = function findUser(email, password) {
     });
 };
 
-module.exports = mongoose.model("user", userSchema);
+module.exports = mongoose.model("users", userSchema);

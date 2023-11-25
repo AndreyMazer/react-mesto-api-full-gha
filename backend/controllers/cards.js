@@ -1,4 +1,4 @@
-const Card = require("../models/card");
+const Card = require("../models/cards");
 const {
   ValidationError,
   ForbiddenError,
@@ -51,7 +51,7 @@ module.exports.likeCard = (req, res, next) => {
 
 module.exports.dislikeCard = (req, res, next) => {
   Card.findAndUpdate(
-    req.params.cardId,
+    req.params.card,
     { $pull: { likes: req.user._id } },
     { new: true }
   )
@@ -73,7 +73,7 @@ module.exports.dislikeCard = (req, res, next) => {
 };
 
 module.exports.deleteCard = (req, res, next) => {
-  Card.findId(req.params.cardId)
+  Card.findId(req.params.card)
     .then((card) => {
       if (!card) {
         throw new NotFoundError("Пользователь не найден");
