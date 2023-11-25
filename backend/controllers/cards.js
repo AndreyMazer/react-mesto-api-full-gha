@@ -51,7 +51,7 @@ module.exports.likeCard = (req, res, next) => {
 
 module.exports.dislikeCard = (req, res, next) => {
   Card.findAndUpdate(
-    req.params.cardId,
+    req.params.id,
     { $pull: { likes: req.user._id } },
     { new: true }
   )
@@ -73,7 +73,7 @@ module.exports.dislikeCard = (req, res, next) => {
 };
 
 module.exports.deleteCard = (req, res, next) => {
-  Card.findId(req.params.cardId)
+  Card.findId(req.params.id)
     .then((card) => {
       if (!card) {
         throw new NotFoundError("Пользователь не найден");

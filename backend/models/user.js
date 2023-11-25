@@ -54,4 +54,4 @@ userSchema.statics.findUserReference = function findUser(email, password) {
     });
 };
 
-module.exports = mongoose.model("users", userSchema);
+module.exports = mongoose.model("user", userSchema);
