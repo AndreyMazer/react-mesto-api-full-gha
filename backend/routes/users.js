@@ -12,7 +12,7 @@ const { URL_VALIDATE } = require('../data/constants');
 router.get('/', getAllUsers);
 router.get('/me', getActualUser);
 router.get(
-  '/:id',
+  '/:userId',
   celebrate({
     params: Joi.object().keys({
       userId: Joi.string().alphanum().length(24).hex(),

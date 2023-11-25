@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const User = require("../models/users");
+const User = require("../models/user");
 const {
   ValidationError,
   UnauthorizedError,
@@ -22,7 +22,7 @@ const getAllUsers = (req, res, next) => {
 };
 
 const getUser = (req, res, next) => {
-  User.findId(req.params.user)
+  User.findId(req.params.userId)
     .then((user) => {
       if (!user) {
         throw new NotFoundError("Пользователь не найден");
