@@ -4,17 +4,12 @@ class Api {
     this._headers = options.headers;
   }
 
-  _checkRes(res) {
+  _checkRes = (res) => {
     if (res.ok) {
       return res.json();
     }
 
-    return Promise.reject(new Error(`Ошибка: ${res.status}`));
-  }
-
-  _toDo(endpoint, options) {
-    const url = `${this._url}/${endpoint}`;
-    return fetch(url, options).then(this._checkRes);
+    return Promise.reject("Произошла ошибка");
   }
 
   setToken(jwt) {
@@ -22,70 +17,70 @@ class Api {
 }
 
   getProfile() {
-    return this._toDo("users/me", {
+    return fetch(`${this._url}/users/me`, {
       method: "GET",
       headers: this._headers,
-    });
+    }).then(this._checkRes);
   }
 
   editProfile(data) {
-    return this._toDo(`users/me`, {
+    return fetch(`${this._url}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
         about: data.about,
       }),
-    });
+    }).then(this._checkRes);
   }
 
   editAvatar(data) {
-    return this._toDo(`users/me/avatar`, {
+    return fetch(`${this._url}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         avatar: data.avatar,
       }),
-    });
+    }).then(this._checkRes);
   }
 
   getInitialCards() {
-    return this._toDo(`cards`, {
+    return fetch(`${this._url}/cards`, {
       method: "GET",
       headers: this._headers,
-    });
+    }).then(this._checkRes);
   }
 
   addCard(data) {
-    return this._toDo(`cards`, {
+    return fetch(`${this._url}/cards`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
         link: data.link,
       }),
-    });
+    }).then(this._checkRes);
   }
 
   deleteCard(id) {
-    return this._toDo(`cards/${id}`, {
+    return fetch(`${this._url}/cards/${id}`, {
       method: "DELETE",
       headers: this._headers,
-    });
+    }).then(this._checkRes);
   }
 
   addLike(id) {
-    return this._toDo(`cards/${id}/likes`, {
+    return fetch(`${this._url}/cards/${id}/likes`, {
       method: "PUT",
       headers: this._headers,
-    });
+    }).then(this._checkRes);
   }
 
   deleteLike(id) {
-    return this._toDo(`cards/${id}/likes`, {
+    return fetch(`${this._url}/cards/${id}/likes`, {
       method: "DELETE",
       headers: this._headers,
-    });
+    }).then(this._checkRes);
   }
 }
 

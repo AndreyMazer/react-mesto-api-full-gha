@@ -66,7 +66,7 @@ function App() {
         }
       })
       .catch(() => {
-        setMessage(true);
+        setMessage(false);
         setInfoTooltipOpen(true);
       });
   }
