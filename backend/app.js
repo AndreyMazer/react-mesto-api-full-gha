@@ -34,6 +34,8 @@ app.use(cookieParser());
 
 mongoose.connect(DB_URL);
 
+app.use(reqLog);
+app.use(errLog);
 app.use(router);
 app.use(errors());
 app.use((err, req, res, next) => {

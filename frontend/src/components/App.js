@@ -26,8 +26,6 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState(null);
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
-  //const [isSuccessInfoTooltipStatus, setIsSuccessInfoTooltipStatus] =
-  //React.useState(false);
   const [message, setMessage] = React.useState(false);
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [userEmail, setUserEmail] = React.useState("");
@@ -57,19 +55,6 @@ function App() {
         .catch((err) => console.log(err));
     }
   }, [navigate]);
-
-  /* function handleTokenCheck() {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      checkJwt(jwt)
-        .then((res) => {
-          setLoggedIn(true);
-          setUserEmail(res.data.email);
-          navigate("/", { replace: true });
-        })
-        .catch((err) => console.log(err));
-    }
-  }*/
 
   function handleRegister(email, password) {
     register(email, password)
@@ -106,21 +91,6 @@ function App() {
   function handleCardClick(card) {
     setSelectedCard(card);
   }
-
- /* function handleTokenCheck() {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      checkJwt(jwt)
-        .then((res) => {
-          setLoggedIn(true);
-          setUserEmail(res.data.email);
-          navigate("/", { replace: true });
-        })
-        .catch((err) => console.log(err));
-    }
-  }*/
-
-  
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i === currentUser._id);
@@ -265,3 +235,24 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
+
+
+ /* function handleTokenCheck() {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      checkJwt(jwt)
+        .then((res) => {
+          setLoggedIn(true);
+          setUserEmail(res.data.email);
+          navigate("/", { replace: true });
+        })
+        .catch((err) => console.log(err));
+    }
+  }*/
+
+  
