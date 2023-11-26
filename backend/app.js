@@ -4,24 +4,8 @@ const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const { errors } = require("celebrate");
 const router = require("./routes/index");
-
 const winston = require("winston");
 const expressWinston = require("express-winston");
-
-const reqLog = expressWinston.logger({
-  transports: [new winston.transports.File({ filename: "request.log" })],
-  format: winston.format.json(),
-});
-
-const errLog = expressWinston.logger({
-  transports: [new winston.transports.File({ filename: "error.log" })],
-  format: winston.format.json(),
-});
-
-module.exports = {
-  reqLog,
-  errLog,
-};
 
 const { PORT = 3000, DB_URL = "mongodb://127.0.0.1/mestodb" } = process.env;
 
@@ -33,10 +17,21 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 mongoose.connect(DB_URL);
+app.use(router);
+
+const reqLog = expressWinston.logger({
+  transports: [new winston.transports.File({ filename: "request.log" })],
+  format: winston.format.json(),
+});
+
+const errLog = expressWinston.logger({
+  transports: [new winston.transports.File({ filename: "error.log" })],
+  format: winston.format.json(),
+});
 
 app.use(reqLog);
 app.use(errLog);
-app.use(router);
+
 app.use(errors());
 app.use((err, req, res, next) => {
   const { statusCode = 500, message } = err;
@@ -50,3 +45,8 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
 });
+
+module.exports = {
+  reqLog,
+  errLog,
+};

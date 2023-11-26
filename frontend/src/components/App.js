@@ -15,7 +15,7 @@ import Register from "./Register";
 import Login from "./Login";
 import ProtectedRouteElement from "./ProtectedRoute";
 import InfoTooltip from "./InfoTooltip";
-import { register, authorize, checkJwt } from "../utils/Auth";
+import { register, authorize, checkToken } from "../utils/Auth";
 
 function App() {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
@@ -43,11 +43,11 @@ function App() {
   }, [loggedIn]);
 
   React.useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      checkJwt(jwt)
+    const token = localStorage.getItem("token");
+    if (token) {
+      checkToken(token)
         .then((res) => {
-          api.setToken(jwt);
+          api.setToken(token);
           setUserEmail(res.email);
           setLoggedIn(true);
           navigate("/", { replace: true });
@@ -75,8 +75,8 @@ function App() {
     authorize(email, password)
       .then((res) => {
         if (res) {
-          localStorage.setItem("jwt", res.jwt);
-          api.setToken(res.jwt);
+          localStorage.setItem("token", res.token);
+          api.setToken(res.token);
           setLoggedIn(true);
           setUserEmail(res.email);
           navigate("/", { replace: true });
@@ -173,7 +173,7 @@ function App() {
   }
 
   function onSignOut() {
-    localStorage.removeItem("jwt");
+    localStorage.removeItem("token");
     setLoggedIn(false);
     setUserEmail("");
     navigate("/sign-in");
@@ -236,23 +236,5 @@ function App() {
 
 export default App;
 
-
-
-
-
-
-
- /* function handleTokenCheck() {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      checkJwt(jwt)
-        .then((res) => {
-          setLoggedIn(true);
-          setUserEmail(res.data.email);
-          navigate("/", { replace: true });
-        })
-        .catch((err) => console.log(err));
-    }
-  }*/
 
   

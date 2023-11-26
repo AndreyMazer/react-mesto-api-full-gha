@@ -14,8 +14,8 @@ export const register = (email, password) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      password: password,
-      email: email,
+      "password": password,
+      "email": email,
     }),
   }).then((res) => {
     return checkResponse(res);
@@ -28,20 +28,20 @@ export const authorize = (email, password) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      password: password,
-      email: email,
+      "password": password,
+      "email": email,
     }),
   }).then((res) => {
     return checkResponse(res);
   });
 };
 
-export const checkJwt = (jwt) => {
+export const checkToken = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${jwt}`,
+      "Authorization": `Bearer ${token}`,
     },
   }).then((res) => {
     return checkResponse(res);

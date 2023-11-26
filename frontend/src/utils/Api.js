@@ -12,8 +12,8 @@ class Api {
     return Promise.reject("Произошла ошибка");
   }
 
-  setToken(jwt) {
-    this._headers['authorization'] = `Bearer ${jwt}`;
+  setToken(token) {
+    this._headers['authorization'] = `Bearer ${token}`;
 }
 
   getProfile() {
@@ -62,22 +62,22 @@ class Api {
     }).then(this._checkRes);
   }
 
-  deleteCard(id) {
-    return fetch(`${this._url}/cards/${id}`, {
+  deleteCard(cardId) {
+    return fetch(`${this._url}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
     }).then(this._checkRes);
   }
 
-  addLike(id) {
-    return fetch(`${this._url}/cards/${id}/likes`, {
+  addLike(cardId) {
+    return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this._headers,
     }).then(this._checkRes);
   }
 
-  deleteLike(id) {
-    return fetch(`${this._url}/cards/${id}/likes`, {
+  deleteLike(cardId) {
+    return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this._headers,
     }).then(this._checkRes);

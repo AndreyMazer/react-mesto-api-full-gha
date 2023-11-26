@@ -11,7 +11,7 @@ const { URL_VALIDATE } = require('../data/constants');
 
 router.get('/', getAllUsers);
 router.get('/me', getActualUser);
-router.get(
+/*router.get(
   '/:userId',
   celebrate({
     params: Joi.object().keys({
@@ -19,7 +19,7 @@ router.get(
     }),
   }),
   getUser
-);
+);*/
 router.patch(
   '/me',
   celebrate({
