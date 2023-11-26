@@ -49,7 +49,7 @@ userSchema.statics.findUserReference = function findUser(email, password) {
           );
         }
 
-        return user;
+        return users;
       });
     });
 };
