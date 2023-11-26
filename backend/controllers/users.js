@@ -37,7 +37,7 @@ const getUser = (req, res, next) => {
       if (err.name === "CastError") {
         return next(new ValidationError("Введены некорректные данные"));
       }
-      return next(new ServerError("Произошла ошибка на сервере"));
+      return next(new ServerError("На сервере произошла ошибка"));
     });
 };
 
@@ -157,7 +157,7 @@ const getActualUser = (req, res, next) => {
       if (err.name === "CastError") {
         return next(new ValidationError("Введены некорректные данные"));
       }
-      return next(new ServerError("Произошла ошибка на сервере"));
+      return next(new ServerError("На сервере произошла ошибка"));
     });
 };
 
