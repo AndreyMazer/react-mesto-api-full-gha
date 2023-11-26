@@ -24,7 +24,7 @@ const reqLog = expressWinston.logger({
   format: winston.format.json(),
 });
 
-const errLog = expressWinston.logger({
+const errLog = expressWinston.errorLogger({
   transports: [new winston.transports.File({ filename: "error.log" })],
   format: winston.format.json(),
 });
