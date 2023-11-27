@@ -142,7 +142,7 @@ const login = (req, res, next) => {
 };
 
 const getActualUser = (req, res, next) => {
-  User.findId(req.user._id)
+  User.findById(req.user._id)
     .then((user) => {
       if (!user) {
         throw new NotFoundError("Пользователь не найден");
