@@ -22,7 +22,7 @@ const getAllUsers = (req, res, next) => {
 };
 
 const getUser = (req, res, next) => {
-  User.findId(req.params.userId)
+  User.findById(req.params.userId)
     .then((user) => {
       if (!user) {
         throw new NotFoundError("Пользователь не найден");
