@@ -19,7 +19,7 @@ app.use(cookieParser());
 mongoose.connect(DB_URL);
 app.use(router);
 
-const reqLog = expressWinston.requestlogger({
+const reqLog = expressWinston.logger({
   transports: [new winston.transports.File({ filename: "request.log" })],
   format: winston.format.json(),
 });
