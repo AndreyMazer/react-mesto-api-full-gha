@@ -17,13 +17,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 mongoose.connect(DB_URL);
-app.use(reqLog);
-app.use(router);
-
 const reqLog = expressWinston.logger({
   transports: [new winston.transports.File({ filename: "request.log" })],
   format: winston.format.json(),
 });
+
+app.use(reqLog);
+app.use(router);
+
 
 const errLog = expressWinston.errorLogger({
   transports: [new winston.transports.File({ filename: "error.log" })],
