@@ -17,6 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 mongoose.connect(DB_URL);
+app.use(reqLog);
 app.use(router);
 
 const reqLog = expressWinston.logger({
@@ -29,7 +30,6 @@ const errLog = expressWinston.errorLogger({
   format: winston.format.json(),
 });
 
-app.use(reqLog);
 app.use(errLog);
 
 app.use(errors());
